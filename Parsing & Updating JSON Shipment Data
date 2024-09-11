@@ -1,0 +1,28 @@
+import json
+
+# Sample JSON from an external system
+json_data = '''
+{
+  "shipment_id": "54321",
+  "origin": "New York",
+  "destination": "Los Angeles",
+  "carrier": "FedEx",
+  "status": "In Transit",
+  "tracking_events": [
+    {"timestamp": "2024-09-10T08:45:00Z", "location": "New York", "status": "Picked Up"},
+    {"timestamp": "2024-09-11T12:30:00Z", "location": "Columbus", "status": "In Transit"}
+  ]
+}
+'''
+
+# Parse the JSON data
+shipment_data = json.loads(json_data)
+
+# Extracting shipment info
+shipment_id = shipment_data['shipment_id']
+carrier = shipment_data['carrier']
+status = shipment_data['status']
+
+# Simulating an update in the internal system
+print(f"Updating shipment {shipment_id}:")
+print(f"Carrier: {carrier}, Status: {status}")
