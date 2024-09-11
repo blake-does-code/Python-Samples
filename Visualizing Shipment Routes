@@ -1,0 +1,18 @@
+import folium
+
+# Sample shipment route coordinates
+route = [
+    {"location": "New York", "lat": 40.7128, "lon": -74.0060},
+    {"location": "Chicago", "lat": 41.8781, "lon": -87.6298},
+    {"location": "Los Angeles", "lat": 34.0522, "lon": -118.2437}
+]
+
+# Initialize a map centered on the first location
+m = folium.Map(location=[route[0]['lat'], route[0]['lon']], zoom_start=5)
+
+# Add markers for each location
+for stop in route:
+    folium.Marker([stop['lat'], stop['lon']], popup=stop['location']).add_to(m)
+
+# Display the map
+m.save('shipment_route_map.html')
