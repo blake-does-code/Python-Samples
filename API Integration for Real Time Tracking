@@ -1,0 +1,19 @@
+import requests
+
+# API endpoint for tracking
+api_url = "https://api.carrier.com/track"
+shipment_id = "12345"
+
+# Making an API request to get shipment status
+response = requests.get(f"{api_url}/{shipment_id}")
+
+# Check if the request was successful
+if response.status_code == 200:
+    shipment_data = response.json()
+
+    # Extracting relevant info
+    status = shipment_data['status']
+    location = shipment_data['tracking_events'][-1]['location']
+    print(f"Shipment {shipment_id} is currently {status} at {location}.")
+else:
+    print(f"Failed to retrieve shipment data. Status code: {response.status_code}")
