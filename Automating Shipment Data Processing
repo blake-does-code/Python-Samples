@@ -1,0 +1,16 @@
+import pandas as pd
+
+# Sample data (could be pulled from a database or CSV)
+data = {
+    'shipment_id': [101, 102, 103, 104],
+    'carrier': ['FedEx', 'UPS', 'FedEx', 'DHL'],
+    'cost': [200, 150, 220, 180]
+}
+
+df = pd.DataFrame(data)
+
+# Group by carrier and calculate total cost
+carrier_summary = df.groupby('carrier').sum()
+
+# Print the summary
+print(carrier_summary)
