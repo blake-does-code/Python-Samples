@@ -1,0 +1,23 @@
+import smtplib
+from datetime import datetime
+
+# Sample shipment data
+shipments = [
+    {'shipment_id': '12345', 'expected_delivery': '2024-09-10', 'actual_delivery': None},
+    {'shipment_id': '67890', 'expected_delivery': '2024-09-09', 'actual_delivery': '2024-09-11'}
+]
+
+# Email function
+def send_email_alert(shipment_id):
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login('your-email@gmail.com', 'password')
+    message = f"Subject: Shipment {shipment_id} Delayed\n\nShipment {shipment_id} has been delayed."
+    server.sendmail('your-email@gmail.com', 'recipient-email@gmail.com', message)
+    server.quit()
+
+# Check for delays
+today = datetime.today().strftime('%Y-%m-%d')
+for shipment in shipments:
+    if shipment['actual_delivery'] is None and shipment['expected_delivery'] < today:
+        send_email_alert(shipment['shipment_id'])
